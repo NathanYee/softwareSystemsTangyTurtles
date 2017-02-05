@@ -20,7 +20,7 @@ int main() {
 	}
 
 	/****Set timer1 for 8-bit fast PWM output ****/
-	DDRB = DDRB | 0x00001000;
+	DDRB = DDRB | _BV(DDB1);
 	TCCR1B = (1 << CS10); // Set prescaler to full 16MHz
 	TCCR1A |= (1 << COM1A1); // Pin low when TCNT1=OCR1A
 	TCCR1A |= (1 << WGM10); // Use 8-bit fast PWM mode
