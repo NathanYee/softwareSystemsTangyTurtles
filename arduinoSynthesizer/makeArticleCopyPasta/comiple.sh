@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# use by running "bash compile.sh listing"
+
 filename=$1
 rm $filename
 rm $filename.hex
