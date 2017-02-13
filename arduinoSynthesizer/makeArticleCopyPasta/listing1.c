@@ -7,6 +7,7 @@
 #define PI2 6.283185 // 2*PI saves calculation later
 #define AMP 127 // Scaling factor for sine wave
 #define OFFSET 128 // Offset shifts wave to all >0 values
+#define FREQUENCY 440
 
 /******** Lookup table ********/
 #define LENGTH 256 // Length of the wave lookup table
@@ -30,7 +31,8 @@ int main() {
 	TCCR2A = 0; // No options in control register A
 	TCCR2B = (1 << CS21); // Set prescaler to divide by 8
 	TIMSK2 = (1 << OCIE2A); // Call ISR when TCNT2 = OCRA2
-	OCR2A = 32; // Set frequency of generated wave
+	// OCR2A = 18; // Set frequency of generated wave
+	OCR2A = round((2000000.0 / 256.0) * (1.0 / FREQUENCY)); // Set frequency of generated wave
 	sei(); // Enable interrupts to generate waveform!
 
 	while(1){
@@ -42,5 +44,5 @@ ISR(TIMER2_COMPA_vect) { // Called when TCNT2 == OCR2A
 	static unsigned char index=0; // Points to each table entry
 	OCR1AL = wave[index++]; // Update the PWM output
 	__asm("NOP;NOP"); // Fine tuning
-	TCNT2 = 6; // Timing to compensate for ISR run time
+	TCNT2 = 5; // Timing to compensate for ISR run time
 }
