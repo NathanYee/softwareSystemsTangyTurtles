@@ -10,7 +10,7 @@
 
 int main (void)
 {
-  /* set pin 5 of PORTB for output*/
+  /* set pin 1 of PORTB for output*/
   DDRB |= _BV(DDB1);
 
   while(1) {
