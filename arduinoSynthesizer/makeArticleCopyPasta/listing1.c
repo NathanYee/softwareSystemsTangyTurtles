@@ -7,7 +7,7 @@
 #define PI2 6.283185 // 2*PI saves calculation later
 #define AMP 127 // Scaling factor for sine wave
 #define OFFSET 128 // Offset shifts wave to all >0 values
-#define FREQUENCY 440
+#define FREQUENCY 440 // Enter desired frequency here - 1450+ don't work with speaker
 
 /******** Lookup table ********/
 #define LENGTH 256 // Length of the wave lookup table
