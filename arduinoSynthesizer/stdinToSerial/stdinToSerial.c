@@ -77,7 +77,7 @@ int write_port(int fd, char *data) {
 
 int main(int argc, char *argv[]) {
     char ch;
-    char *filename = "mary_had_a_little_lamb.txt";
+    char *filename = "little_lamb.txt";
     int frequency = 0;
     int duration = 0;
     char *port = "/dev/ttyUSB0";
