@@ -25,3 +25,8 @@ void uart_init(void){
 	UCSR0C = _BV(UCSZ01) | _BV(UCSZ00);
 	UCSR0B =  _BV(RXEN0);
 }
+
+char uart_get_char(void){
+	loop_until_bit_is_set(UCSR0A, RXC0);
+	return UDR0;
+}
