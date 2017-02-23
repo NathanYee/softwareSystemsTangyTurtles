@@ -6,6 +6,7 @@
 */
 #define LENGTH 256 // Length of the wave lookup table
 int wave[LENGTH]; // Storage for waveform
+char freq;
 
 void init_wave();
 

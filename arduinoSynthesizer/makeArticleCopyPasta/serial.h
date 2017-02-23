@@ -1,6 +1,9 @@
 #ifndef SERIAL_H
 #define SERIAL_H
 
+#include <avr/io.h> // Use for register naming of io
+#include <stdio.h> // Use for register naming of io
+
 /*
 	Defining cpu freq and baud rate if not already defined
 */
@@ -14,6 +17,9 @@
 #include <util/setbaud.h> // Use for serial communication
 #include <avr/io.h> // Use for register naming of ios
 
+FILE uart_input;
+
 void uart_init(void);
+char uart_get_char(void);
 
 #endif // SERIAL_H
