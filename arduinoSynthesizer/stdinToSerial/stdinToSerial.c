@@ -26,12 +26,22 @@ FILE * open_file(char *filename, char *open_type) {
 
 int open_port(char *port) {
     int fd; // File descriptor for port
+    speed_t baud = B9600;
+    struct termios settings;
 
     // Open the specified serial port with a few options:
     //     O_RDWR: open port for read and write
     //     O_NOCTTY: never allow port to become controlling terminal
     //     O_NDELAY: non-blocking / ignore DCD signal line
     fd = open(port, O_RDWR | O_NOCTTY | O_NDELAY);
+
+    // Define serial port settings
+    tcgetattr(fd, &settings);
+    cfsetospeed(&settings, baud);
+
+    // Apply serial port settings
+    tcsetattr(fd, TCSANOW, &settings);
+    tcflush(fd, TCOFLUSH);
 
     // Error checking
     if (fd == -1)
@@ -73,7 +83,7 @@ int main(int argc, char *argv[]) {
     char *port = "/dev/ttyUSB0";
 
     // Read command line options
-    while ((ch = getopt(argc, argv, "f:p:")) != -1) {
+    while ((ch = getopt(argc, argv, "f:p:h")) != -1) {
         switch (ch) {
         case 'f':
             filename = optarg;
@@ -101,12 +111,15 @@ int main(int argc, char *argv[]) {
     }
 
     // Write each line of the song file to the serial port
-    int n;
+    int num_bytes_written;
     while (fscanf(song, "%d, %d", &frequency, &duration) == 2) {
         char data[20];
         sprintf(data, "%d, %d", frequency, duration);
-        if (n = write_port(fd, data) < 0) {
+        if (num_bytes_written = write_port(fd, data) < 0) {
             return -1;
         }
     }
+
+    // Close the serial port
+    close(fd);
 }
