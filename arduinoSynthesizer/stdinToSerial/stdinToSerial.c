@@ -88,21 +88,21 @@ int write_port(int fd, char *data) {
 // Write each line in a specified file to a specified serial port
 int main(int argc, char *argv[]) {
     char ch;
-    char *filename = "little_lamb.txt";
-    char *port = "/dev/ttyUSB0";
+    char *filename = "little_lamb.txt"; // Default song file
+    char *port = "/dev/ttyACM0"; // Default serial port
     int frequency = 0;
     int duration = 0;
 
     // Read command line options
     while ((ch = getopt(argc, argv, "f:p:h")) != -1) {
         switch (ch) {
-        case 'f':
+        case 'f': // Define song file name
             filename = optarg;
             break;
-        case 'p':
+        case 'p': // Define serial port
              port = optarg;
             break;
-        case 'h':
+        case 'h': // Help
             fprintf(stdout, "Optargs:\n"
                             "   -f, define the song file name\n"
                             "   -p, define the serial port\n"
@@ -124,10 +124,9 @@ int main(int argc, char *argv[]) {
     // Write each line of the song file to the serial port
     while (fscanf(song, "%d, %d", &frequency, &duration) == 2) {
         char data[20];
-        // sprintf(data, "%d, %d", frequency, duration);
-        sprintf(data, "%d", frequency);
+        sprintf(data, "%d", frequency); // Store formatted string in `data`
         write_port(fd, data);
-        usleep(duration*1000);
+        usleep(duration*1000); // Sleep for `duration` milliseconds
     }
 
     // Close the serial port

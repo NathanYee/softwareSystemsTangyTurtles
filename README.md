@@ -18,6 +18,8 @@ Shane Kelly, Carl Moser, Nathan Yee
 
 ## Usage
 
+`./stdinToSerial -f little_lamb.txt -p /dev/ttyACM0`
+
 ## License
 
 **MIT License**
