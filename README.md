@@ -7,8 +7,9 @@ A team repository for the class Software Systems at Olin College of Engineering 
 We have created an Arduino synthesizer that can be commanded to play a series of tones from an input file that specifies the frequency and duration of each sequential tone. The tones are played through a simple 1-bit DAC, which low-pass filters the output of the Arduino's PWM signals to create smooth waveforms.
 
 ## Authors
-
-Shane Kelly, Carl Moser, Nathan Yee
+[Shane Kelly](https://github.com/shanek21), 
+[Carl Moser](https://github.com/cmoser96), 
+[Nathan Yee](https://github.com/NathanYee)
 
 ## Resources
 
@@ -20,11 +21,17 @@ Shane Kelly, Carl Moser, Nathan Yee
 
 Compile the Arduino code and upload it to the Uno.
 
-`SOMETHING ABOUT AVR-DUDE PROBABLY`
+`cd code/arduino`
 
-Once the Arduino code has been uploaded, send the desired song file to the serial port that the Arduino is currently connected to.
+`./compile.sh`
 
-`make && ./stdinToSerial -f little_lamb.txt -p /dev/ttyACM0`
+Send the desired song file to the serial port that the Arduino is currently connected to. Replace `little_lamb.txt` with the preferred song file name and `/dev/ttyACM0` with the current serial port of the Arduino.
+
+`cd ../stdinToSerial`
+
+`make`
+
+`./stdinToSerial -f little_lamb.txt -p /dev/ttyACM0`
 
 ## License
 
