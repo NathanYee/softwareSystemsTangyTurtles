@@ -58,7 +58,7 @@
         <h1>Implementation</h1>
         <p>
 
-          The last design decision that we made was to use Arduino's implementation of serial to be able to update the frequency. We attempted to implement a c version of serial communication using the serial registers directly. This caused an issue with all serial communication (even after uploading other code) with the arduino. We are not sure what exactly happened but we believe that a fuse bit within the arduino might have been changed during testing. Since we are not sure what caused the issue, we did not want to risk breaking more arduinos so we decided to switch to Arduino's implementation because we knew that it would work.
+          The last design decision that we made was to use Arduino's implementation of serial to be able to update the frequency. We attempted to implement a c version of serial communication using the serial registers directly. This caused an issue with all serial communication (even after uploading other code) with the arduino. We are not sure what exactly happened but we believe that a fuse bit within the arduino might have been changed during testing. Since we are not sure what caused the issue and did not want to risk breaking more arduinos, we decided to switch to Arduino's implementation because we knew that it would work.
         </p>
 
         <h1>Results</h1>
