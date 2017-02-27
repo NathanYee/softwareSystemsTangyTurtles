@@ -38,17 +38,6 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-        <h1>Results</h1>
-        <p>We have created an Arduino synthesizer that can be commanded to play a series of tones from an input file that specifies the frequency and duration of each sequential tone. The tones are played through a simple 1-bit DAC, which low-pass filters the output of the Arduino's PWM signals to create smooth waveforms.</p>
-        <center>
-          <img src="images/Unfiltered.png" alt="Unfiltered Waveform">
-          <p>
-            The unfiltered signal outputted by the Arduino
-          </p>
-          <br />
-
-          <img src="images/Filtered.png" alt="Filtered Waveform">
-        </center>
 
         <h1>The Team</h1>
         <p>
@@ -70,18 +59,29 @@
 
         <h1>Results</h1>
         <p>We have created an Arduino synthesizer that can be commanded to play a series of tones from an input file that specifies the frequency and duration of each sequential tone. The tones are played through a simple 1-bit DAC, which low-pass filters the output of the Arduino's PWM signals to create smooth waveforms.</p>
+        <center>
+          <img src="images/Unfiltered.png" alt="Unfiltered Waveform">
+          <p>
+            The unfiltered signal outputted by the Arduino
+          </p>
+          <br />
+
+          <img src="images/Filtered.png" alt="Filtered Waveform">
+        </center>
 
         <h1>Resources</h1>
         <p>
-          <a href="http://makezine.com/projects/make-35/advanced-arduino-sound-synthesis/ ">Skill Builder: Advanced Arduino Sound Synthesis, Jon Thompson</a>,
-          <a href="https://www.appelsiini.net/2011/simple-usart-with-avr-libc ">Serial communications on an Arduino in C.</a>,
-          <a href="https://www.arduino.cc/en/Reference/PortManipulation ">Arduino port registers.</a>,
+          <a href="http://makezine.com/projects/make-35/advanced-arduino-sound-synthesis/ ">Skill Builder: Advanced Arduino Sound Synthesis, Jon Thompson</a>
+          <br>
+          <a href="https://www.appelsiini.net/2011/simple-usart-with-avr-libc ">Serial communications on an Arduino in C</a>
+          <br>
+          <a href="https://www.arduino.cc/en/Reference/PortManipulation ">Arduino port registers.</a>
         </p>
-
 
         <h1>Usage</h1>
         <p>
           Compile the Arduino code and upload it to the Uno.<br />
+          <code>cd code/arduino</code><br />
           <code>bash compile.sh listing1</code><br />
           <br />
           Once the Arduino code has been uploaded, send the desired song file to the serial port that the Arduino is currently connected to. <br />
