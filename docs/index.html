@@ -61,9 +61,9 @@
         </p>
 
         <h1>Implementation</h1>
-        
+
         <p>
-          To implement the 1-bit DAC we start by creating a wavetable and populating it with sin wave amplitudes.
+          To implement the software for our 1-bit DAC we start by creating a wavetable and populating it with sin wave amplitudes.
 
           <pre><code>
             int wave[LENGTH]; // Storage for waveform
@@ -100,13 +100,16 @@
           Max Frequency = 2000000.0 / (LENGTH * OCR2A) = 2000000.0 / (256 * 6) = 1307 Hz
           <br />
           Where OCR2A - TCNT2 = 6 - 5 = 1
-
+        </p>
+        <p>
           Once the Arduino generated an output wave from its PWM port, we ran the andigital signal through a 1-bit DAC. Our DAC essentially acts as a low-pass filter, which smooths the jagged PWM signal in order to create a batter waveform to be played through a speaker.
         <br />
         <center><img src="images/synth_schem.svg" alt="1-Bit DAC Circuit"></center>
-        <br />
+        </p>
+        <p>
           To play a specified song on our Arduino synthesizer, we created a file type that stores a sequence of tone frequencies and tone durations. We then passed this information to the Arduino through serial. We took advantage of the small-C-tools architecture to translate information from a file/standard input to a specified serial port. The tool that we wrote to take care of this is <a href="https://github.com/NathanYee/softwareSystemsTangyTurtles/blob/master/code/stdinToSerial/stdinToSerial.c">stdinToSerial.c</a>, which can have any file passed through it and have that file's contents be pushed to any serial port.
-        <br />
+        </p>
+        <p>
           The last design decision that we made was to use Arduino's implementation of serial to be able to update the frequency. We attempted to implement a c version of serial communication using the serial registers directly. This caused an issue with all serial communication (even after uploading other code) with the arduino. We are not sure what exactly happened but we believe that a fuse bit within the arduino might have been changed during testing. Since we are not sure what caused the issue and did not want to risk breaking more arduinos, we decided to switch to Arduino's implementation because we knew that it would work.
         </p>
 
