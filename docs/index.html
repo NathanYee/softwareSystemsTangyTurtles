@@ -46,6 +46,11 @@
           <a href="https://github.com/NathanYee">Nathan Yee</a>
         </p>
 
+        <h1>Big Idea</h1>
+        <p>
+          We created a synthesizer that can play sinusoidal waves through a speaker of a user-specified frequency. A specially formatted file type can then be passed to the Arduino to command it to play certain notes in sequence, which create songs!
+        </p>
+
         <h1>Background</h1>
         <p>
           The foundation of this project is creating a wave and outputting it with an Arduino's PWM pin. The most basic waveform is a square wave oscillating between values of 0 and 255. The Arduino’s Timer 2 (TCNT2) counts from 0 to 255 before overflowing and restarting its count at 0. The timer knows when to overflow by comparing its value to the value stored in the “Output Compare Register” (OCR1A).  We can change the value at which TCNT2 overflows (and thus, the wave's frequency) by adjusting the register value stored in OCR1A.
@@ -57,6 +62,7 @@
 
         <h1>Implementation</h1>
         <p>
+<<<<<<< HEAD
           To implement the 1-bit DAC we start by creating a wavetable and populating it with sin wave amplitudes.
 
           <pre><code>
@@ -95,10 +101,19 @@
           <br />
           Where OCR2A - TCNT2 = 6 - 5 = 1
 
+=======
+          Once the Arduino generated an output wave from its PWM port, we ran the andigital signal through a 1-bit DAC. Our DAC essentially acts as a low-pass filter, which smooths the jagged PWM signal in order to create a batter waveform to be played through a speaker.
+        <br />
+        <center><img src="images/synth_schem.svg" alt="1-Bit DAC Circuit"></center>
+        <br />
+          To play a specified song on our Arduino synthesizer, we created a file type that stores a sequence of tone frequencies and tone durations. We then passed this information to the Arduino through serial. We took advantage of the small-C-tools architecture to translate information from a file/standard input to a specified serial port. The tool that we wrote to take care of this is <a href="https://github.com/NathanYee/softwareSystemsTangyTurtles/blob/master/code/stdinToSerial/stdinToSerial.c">stdinToSerial.c</a>, which can have any file passed through it and have that file's contents be pushed to any serial port.
+        <br />
+          The last design decision that we made was to use Arduino's implementation of serial to be able to update the frequency. We attempted to implement a c version of serial communication using the serial registers directly. This caused an issue with all serial communication (even after uploading other code) with the arduino. We are not sure what exactly happened but we believe that a fuse bit within the arduino might have been changed during testing. Since we are not sure what caused the issue and did not want to risk breaking more arduinos, we decided to switch to Arduino's implementation because we knew that it would work.
+>>>>>>> 983fc9471252013c6420f76d768f7c6a68361ea5
         </p>
 
         <h1>Results</h1>
-        <center><iframe width="420" height="315" src="https://www.youtube.com/watch?v=dQw4w9WgXcQ"></iframe></center>
+        <center><iframe width="420" height="315" src="https://www.youtube.com/embed/gjy_MrucHAk"></iframe></center>
         <p>We have created an Arduino synthesizer that can be commanded to play a series of tones from an input file that specifies the frequency and duration of each sequential tone. The tones are played through a simple 1-bit DAC, which low-pass filters the output of the Arduino's PWM signals to create smooth waveforms.</p>
         <center>
           <img src="images/Unfiltered.png" alt="Unfiltered Waveform">
@@ -108,6 +123,9 @@
           <br />
 
           <img src="images/Filtered.png" alt="Filtered Waveform">
+          <p>
+            The filtered signal outputted by the DAC (looks a bit weird because of the scale here)
+          </p>
         </center>
 
         <h1>Resources</h1>
