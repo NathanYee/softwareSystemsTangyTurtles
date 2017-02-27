@@ -20,6 +20,7 @@
 FILE uart_input;
 
 void uart_init(void);
+void uart_put_char(char c);
 char uart_get_char(void);
 
 #endif // SERIAL_H
