@@ -63,7 +63,8 @@
         <h1>Implementation</h1>
         <p>
           Once the Arduino generated an output wave from its PWM port, we ran the andigital signal through a 1-bit DAC. Our DAC essentially acts as a low-pass filter, which smooths the jagged PWM signal in order to create a batter waveform to be played through a speaker.
-        <img src="images/synth_schem.svg" alt="1-Bit DAC Circuit">
+        <br />
+        <center><img src="images/synth_schem.svg" alt="1-Bit DAC Circuit"></center>
         <br />
           To play a specified song on our Arduino synthesizer, we created a file type that stores a sequence of tone frequencies and tone durations. We then passed this information to the Arduino through serial. We took advantage of the small-C-tools architecture to translate information from a file/standard input to a specified serial port. The tool that we wrote to take care of this is <a href="https://github.com/NathanYee/softwareSystemsTangyTurtles/blob/master/code/stdinToSerial/stdinToSerial.c">stdinToSerial.c</a>, which can have any file passed through it and have that file's contents be pushed to any serial port.
         <br />
