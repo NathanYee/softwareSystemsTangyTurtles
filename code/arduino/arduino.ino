@@ -3,9 +3,6 @@
   Tangy Turtles
 */
 
-#define F_CPU 16000000UL // Sets the cpu frequency
-#define BAUD 9600 // Sets the baud rate for serial 
-
 #include <avr/interrupt.h> // Use timer interrupt library
 #include <avr/io.h> // Use for register naming of io
 #include <math.h> // Use for generating sine wave
@@ -42,6 +39,7 @@ void setup(){
 void loop(){
   if(Serial.available()){
     freq = Serial.parseInt();
+    OCR2A = round((2000000.0 / 256.0) * (1.0 / freq)); // Set frequency of generated wave
     Serial.println(freq);
   }
 }
