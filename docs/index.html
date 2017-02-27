@@ -63,7 +63,7 @@
         <h1>Implementation</h1>
 
         <p>
-          To implement the software for our 1-bit DAC we start by creating a wavetable and populating it with sin wave amplitudes.
+          To implement the software for our 1-bit DAC we start by creating a wave table and populating it with sin wave amplitudes.
 
           <pre><code>
             int wave[LENGTH]; // Storage for waveform
@@ -75,7 +75,7 @@
         </p>
 
         <p>
-          Then we create an interrupt service routine to update the position in the wavetable and the PWM's duty cycle:
+          Then we create an interrupt service routine to update the position in the wave table and the PWM's duty cycle:
         <pre><code>
           ISR(TIMER2_COMPA_vect) { // Called when TCNT2 == OCR2A
             static uint8_t index=0; // Points to each table entry
@@ -91,7 +91,7 @@
           <br />
           <code>OCR2A = round((2000000.0 / LENGTH * (1.0 / freq))</code>
           <br />
-          Where 2000000.0 is the frequency of our timer in Mhz, LENGTH is the length of our wavetable, and freq is the desired frequency.
+          Where 2000000.0 is the frequency of our timer in Mhz, LENGTH is the length of our wave table, and freq is the desired frequency.
         </p>
 
         <p>
