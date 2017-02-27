@@ -37,6 +37,4 @@ Send the desired song file to the serial port that the Arduino is currently conn
 
 ## License
 
-**MIT License**
-
-See `LICENSE.txt`.
+[MIT License](https://github.com/NathanYee/softwareSystemsTangyTurtles/blob/master/LICENSE.txt)
