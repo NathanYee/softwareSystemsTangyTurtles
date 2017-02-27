@@ -12,13 +12,19 @@ Shane Kelly, Carl Moser, Nathan Yee
 
 ## Resources
 
-* [How to make a 1-bit DAC and play a tone from an Arduino in C.](http://makezine.com/projects/make-35/advanced-arduino-sound-synthesis/)
-
-## Getting Started
+* [1-bit DAC and wave generation in C.](http://makezine.com/projects/make-35/advanced-arduino-sound-synthesis/)
+* [Serial communications on an Arduino in C.](https://www.appelsiini.net/2011/simple-usart-with-avr-libc)
+* [Arduino port registers.](https://www.arduino.cc/en/Reference/PortManipulation)
 
 ## Usage
 
-`./stdinToSerial -f little_lamb.txt -p /dev/ttyACM0`
+Compile the Arduino code and upload it to the Uno.
+
+`SOMETHING ABOUT AVR-DUDE PROBABLY`
+
+Once the Arduino code has been uploaded, send the desired song file to the serial port that the Arduino is currently connected to.
+
+`make && ./stdinToSerial -f little_lamb.txt -p /dev/ttyACM0`
 
 ## License
 

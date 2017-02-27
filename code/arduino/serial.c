@@ -23,7 +23,12 @@ void uart_init(void){
 		and to recieve data 
 	*/
 	UCSR0C = _BV(UCSZ01) | _BV(UCSZ00);
-	UCSR0B =  _BV(RXEN0);
+	UCSR0B =  _BV(RXEN0)| _BV(TXEN0);
+}
+
+void uart_put_char(char c){
+    loop_until_bit_is_set(UCSR0A, UDRE0); /* Wait until data register empty. */
+    UDR0 = c;
 }
 
 char uart_get_char(void){
