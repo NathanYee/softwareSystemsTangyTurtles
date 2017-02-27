@@ -10,7 +10,6 @@
 #include <avr/io.h> // Use for register naming of io
 #include <math.h> // Use for generating sine wave
 #include "listing1.h"
-#include "serial.h"
 
 /*
 	Initial sine wave parameters
@@ -21,7 +20,8 @@
 
 int main() {
 	uart_init(); // Initializing the uart port for serial
-	stdin  = &uart_input;
+	//stdout = &uart_output;
+	//stdin  = &uart_input;
 
 	init_wave(); // Initializing the wave
 	freq = 255;
@@ -41,7 +41,7 @@ int main() {
 	sei(); // Enable interrupts to generate waveform!
 
 	while(1){
-		freq = getchar();
+		uart_put_char(freq);
 	}
 }
 
