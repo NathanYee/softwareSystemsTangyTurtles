@@ -56,6 +56,46 @@
         </p>
 
         <h1>Implementation</h1>
+        <p>
+          To implement the 1-bit DAC we start by creating a wavetable and populating it with sin wave amplitudes.
+
+          <pre><code>
+            int wave[LENGTH]; // Storage for waveform
+
+            for (int i=0; i&lt;LENGTH; i++) { // Step across wave table
+              float v = (AMP*sin((PI2/LENGTH)*i)); // Compute value
+              wave[i] = (int) (v+OFFSET); // Store value as integer
+          </code></pre>
+        </p>
+
+        <p>
+          Then we create an interrupt service routine to update the position in the wavetable and the PWM's duty cycle: 
+        <pre><code>
+          ISR(TIMER2_COMPA_vect) { // Called when TCNT2 == OCR2A
+            static uint8_t index=0; // Points to each table entry
+            OCR1AL = wave[index++]; // Update the PWM output
+            __asm("NOP;NOP"); // Fine tuning
+            TCNT2 = 5; // Timing to compensate for ISR run time
+          }
+        </code></pre>
+        </p>
+
+        <p>
+          We control the output frequency of our 1-bit DAC by setting the update time of our PWM signal, we modify the value of the Arduino register OCR2A according to the formula:
+          <br />
+          <code>OCR2A = round((2000000.0 / LENGTH * (1.0 / freq))</code>
+          <br />
+          Where 2000000.0 is the frequency of our timer in Mhz, LENGTH is the length of our wavetable, and freq is the desired frequency.
+        </p>
+
+        <p>
+          It is also important to note that the highest frequency of synthesizer is limited as the difference between OCR2A and the interrupt timing offset (5) must greater than or equal to 1. In this case, the highest frequency we can play is:
+          <br />
+          Max Frequency = 2000000.0 / (LENGTH * OCR2A) = 2000000.0 / (256 * 6) = 1307 Hz
+          <br />
+          Where OCR2A - TCNT2 = 6 - 5 = 1
+
+        </p>
 
         <h1>Results</h1>
         <center><iframe width="420" height="315" src="https://www.youtube.com/watch?v=dQw4w9WgXcQ"></iframe></center>
