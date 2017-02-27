@@ -20,11 +20,17 @@ Shane Kelly, Carl Moser, Nathan Yee
 
 Compile the Arduino code and upload it to the Uno.
 
-`SOMETHING ABOUT AVR-DUDE PROBABLY`
+`cd code/arduino`
 
-Once the Arduino code has been uploaded, send the desired song file to the serial port that the Arduino is currently connected to.
+`./compile.sh`
 
-`make && ./stdinToSerial -f little_lamb.txt -p /dev/ttyACM0`
+Send the desired song file to the serial port that the Arduino is currently connected to. Replace `little_lamb.txt` with the preferred song file name and `/dev/ttyACM0` with the current serial port of the Arduino.
+
+`cd ../stdinToSerial`
+
+`make`
+
+`./stdinToSerial -f little_lamb.txt -p /dev/ttyACM0`
 
 ## License
 
