@@ -43,6 +43,7 @@ void loop(){
   }
 }
 
+/******** Creates the wavetable that will be used to update OCR1AL ********/
 void init_wave(){
   /* Populate the waveform table with a sine wave */
   for (int i=0; i<LENGTH; i++) { // Step across wave table
@@ -56,5 +57,5 @@ ISR(TIMER2_COMPA_vect) { // Called when TCNT2 == OCR2A
   static uint8_t index=0; // Points to each table entry
   OCR1AL = wave[index++]; // Update the PWM output
   __asm("NOP;NOP"); // Fine tuning
-  TCNT2 = 6; // Timing to compensate for ISR run time
+  TCNT2 = 5; // Timing to compensate for ISR run time
 }
