@@ -38,13 +38,9 @@ void setup(){
 
 void loop(){
   if(Serial.available()){
-    freq = Serial.parseInt();
-<<<<<<< HEAD
+    freq = Serial.parseInt(); 
     OCR2A = round((2000000.0 / LENGTH) * (1.0 / freq)); // Set frequency of generated wave
     Serial.println(freq);
-=======
-    OCR2A = round((2000000.0 / 256.0) * (1.0 / freq)); // Set frequency of generated wave
->>>>>>> 983fc9471252013c6420f76d768f7c6a68361ea5
   }
 }
 
