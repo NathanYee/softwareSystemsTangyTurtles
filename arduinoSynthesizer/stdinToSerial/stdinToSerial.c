@@ -1,21 +1,23 @@
 // Reads in a specified song file and outputs to a specified serial port
 
-#include <stdio.h>      // standard input / output functions
-#include <unistd.h>     // UNIX standard function definitions
-#include <fcntl.h>      // File control definitions
-
-#include <sys/stat.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <termios.h>
-#include <string.h>
 #include <stdlib.h>
 
-FILE * open_file(char *filename, char *open_type) {
+// Open a file
+//      filename: the name of the file to open
+//      open_type: type of file open (read, write, etc.)
+//      return: the FILE* of the specified song file
+FILE* open_file(char *filename, char *open_type) {
     // Open file
     FILE *song = fopen(filename, open_type);
 
     // Error checking
     if (song == NULL) {
         fprintf(stderr, "open_file: Failed to open %s\n", filename);
+        exit(-1);
     }
     else {
         fprintf(stdout, "open_file: Opened %s\n", filename);
@@ -24,10 +26,13 @@ FILE * open_file(char *filename, char *open_type) {
     return song;
 }
 
+// Open a serial port
+//      port: the name of the serial port to open
+//      return: the file descriptor of the specified serial port
 int open_port(char *port) {
     int fd; // File descriptor for port
-    speed_t baud = B9600;
-    struct termios settings;
+    speed_t baud = B9600; // Baud rate
+    struct termios settings; // Struct to hold settings for serial port
 
     // Open the specified serial port with a few options:
     //     O_RDWR: open port for read and write
@@ -47,6 +52,7 @@ int open_port(char *port) {
     if (fd == -1)
     {
         fprintf(stderr, "open_port: Unable to open %s\n", port);
+        exit(-1);
     }
     else {
         fcntl(fd, F_SETFL, 0);
@@ -56,41 +62,52 @@ int open_port(char *port) {
     return fd;
 }
 
+// Write to a serial port
+//      fd: file descriptor for serial port to write to
+//      data: char array to write to the specified serial port
+//      return: the number of bytes written to the serial port
 int write_port(int fd, char *data) {
     // Find number of bytes to write
     int data_len = sizeof(data)-1;
 
     // Write to serial port
-    int n = write(fd, data, data_len);
+    int num_bytes_written = write(fd, data, data_len);
 
     // Error checking
-    if (n < 0) {
-        fprintf(stderr, "write_port: Write of %d bytes failed!\n", data_len);
-        fprintf(stderr, "write_port: Error number %d!\n", n);
+    if (num_bytes_written < 0) {
+        fprintf(stderr, "write_port: Failed to write \"%s\"\n", data);
+        exit(-1);
     }
     else {
-        fprintf(stdout, "write_port: Wrote \n");
+        fprintf(stdout, "write_port: Wrote \"%s\"\n", data);
     }
 
-    return n;
+    return num_bytes_written;
 }
 
+// Write each line in a specified file to a specified serial port
 int main(int argc, char *argv[]) {
     char ch;
-    char *filename = "little_lamb.txt";
+    char *filename = "little_lamb.txt"; // Default song file
+    char *port = "/dev/ttyACM0"; // Default serial port
     int frequency = 0;
     int duration = 0;
-    char *port = "/dev/ttyUSB0";
 
     // Read command line options
     while ((ch = getopt(argc, argv, "f:p:h")) != -1) {
         switch (ch) {
-        case 'f':
+        case 'f': // Define song file name
             filename = optarg;
             break;
-        case 'p':
+        case 'p': // Define serial port
              port = optarg;
             break;
+        case 'h': // Help
+            fprintf(stdout, "Optargs:\n"
+                            "   -f, define the song file name\n"
+                            "   -p, define the serial port\n"
+                            "   -h, help\n");
+            return 0;
         }
     }
 
@@ -100,26 +117,20 @@ int main(int argc, char *argv[]) {
 
     // Open song file
     FILE *song = open_file(filename, "r");
-    if (song  == NULL) {
-        return -1;
-    }
     
     // Open serial port
-    int fd; // File descriptor for serial port
-    if (fd = open_port(port) == -1) {
-        return -1;
-    }
+    int fd = open_port(port); // File descriptor for serial port
 
     // Write each line of the song file to the serial port
-    int num_bytes_written;
     while (fscanf(song, "%d, %d", &frequency, &duration) == 2) {
         char data[20];
-        sprintf(data, "%d, %d", frequency, duration);
-        if (num_bytes_written = write_port(fd, data) < 0) {
-            return -1;
-        }
+        sprintf(data, "%d", frequency); // Store formatted string in `data`
+        write_port(fd, data);
+        usleep(duration*1000); // Sleep for `duration` milliseconds
     }
 
     // Close the serial port
     close(fd);
+
+    return 0;
 }

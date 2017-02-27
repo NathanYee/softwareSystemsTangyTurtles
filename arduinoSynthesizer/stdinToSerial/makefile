@@ -1,2 +1,2 @@
 stdinToSerial.o: stdinToSerial.c
-	gcc stdinToSerial.c -o stdinToSerial.o
+	gcc stdinToSerial.c -Wall -o stdinToSerial.o
