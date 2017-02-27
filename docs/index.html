@@ -91,7 +91,7 @@
           <br />
           <code>OCR2A = round((2000000.0 / LENGTH * (1.0 / freq))</code>
           <br />
-          Where 2000000.0 is the frequency of our timer in Mhz, LENGTH is the length of our wave table, and freq is the desired frequency.
+          Where 2000000.0 is the frequency of our timer in Mhz, LENGTH is the length of our wave table, and freq is the desired frequency. Note the use of round() as OCR2A must be an integer. Consequently, we are limited in frequency precision and some notes are out of tune.
         </p>
 
         <p>
