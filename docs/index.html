@@ -38,15 +38,26 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-        <h1>Results</h1>
-        <p>We have created an Arduino synthesizer that can be commanded to play a series of tones from an input file that specifies the frequency and duration of each sequential tone. The tones are played through a simple 1-bit DAC, which low-pass filters the output of the Arduino's PWM signals to create smooth waveforms.</p>
-
         <h1>The Team</h1>
         <p>
           <a href="https://github.com/shanek21 ">Shane Kelly</a>,
           <a href="https://github.com/cmoser96 ">Carl Moser</a>,
           <a href="https://github.com/NathanYee">Nathan Yee</a>
         </p>
+
+        <h1>Background</h1>
+        <p>
+          The foundation of this project is creating a wave and outputting it with an Arduino's PWM pin. The most basic waveform is a square wave oscillating between values of 0 and 255. The Arduino’s Timer 2 (TCNT2) counts from 0 to 255 before overflowing and restarting its count at 0. The timer knows when to overflow by comparing its value to the value stored in the “Output Compare Register” (OCR1A).  We can change the value at which TCNT2 overflows (and thus, the wave's frequency) by adjusting the register value stored in OCR1A.
+        <br>
+          When the calculated wave is played to a speaker, the wave will sound choppy because an Arduino can only simulate analog output values by slamming its PWM pin from 0 to 255 at different duty cycles. A DAC must be used to convert these digital waves to smooth analog waves - in our case we used a 1-bit DAC that low-passed the wave to smooth it out.
+        <br>
+          After a wave of a specified frequency can be played on the Arduino, then serial commands simply need to be sent to the Arduino to specify what frequencies should be played. Under the everything-is-a-file architecture, this can be accomplished by opening a serial port and writing the contents of a song file to the port.
+        </p>
+
+        <h1>Implementation</h1>
+
+        <h1>Results</h1>
+        <p>We have created an Arduino synthesizer that can be commanded to play a series of tones from an input file that specifies the frequency and duration of each sequential tone. The tones are played through a simple 1-bit DAC, which low-pass filters the output of the Arduino's PWM signals to create smooth waveforms.</p>
 
         <h1>Resources</h1>
         <p>
@@ -60,134 +71,7 @@
         </p>
 
         <h1>License</h1>
-        <p>
-          MIT License
-        </p>
-
-
-
-        <p>Lorem ipsizzle funky fresh i'm in the shizzle boom shackalack, consectetizzle adipiscing my shizz. Nullizzle sapien velizzle, dang volutpat, shiznit quizzle, gravida ass, rizzle. Pot get down get down tortor. Sed erizzle. Black go to hizzle dolizzle dapibizzle turpis fo shizzle my nizzle yo. Maurizzle pellentesque nibh et check it out. Bow wow wow check it out tortizzle. Pellentesque for sure rhoncizzle bow wow wow. In owned habitasse brizzle dictumst. Nizzle dapibizzle. Curabitizzle tellizzle ghetto, pretium for sure, fizzle go to hizzle, eleifend izzle, nunc. Dope suscipizzle. Integizzle boom shackalack velit ass purus.</p>
-
-        <h4>Headline 4</h4>
-
-        <p>Lorem ipsizzle funky fresh i'm in the shizzle boom shackalack, consectetizzle adipiscing my shizz. Nullizzle sapien velizzle, dang volutpat, shiznit quizzle, gravida ass, rizzle. Pot get down get down tortor. Sed erizzle. Black go to hizzle dolizzle dapibizzle turpis fo shizzle my nizzle yo. Maurizzle pellentesque nibh et check it out. Bow wow wow check it out tortizzle. Pellentesque for sure rhoncizzle bow wow wow. In owned habitasse brizzle dictumst. Nizzle dapibizzle. Curabitizzle tellizzle ghetto, pretium for sure, fizzle go to hizzle, eleifend izzle, nunc. Dope suscipizzle. Integizzle boom shackalack velit ass purus.</p>
-
-        <h5>Headline 5</h5>
-
-        <p>Lorem ipsizzle funky fresh i'm in the shizzle boom shackalack, consectetizzle adipiscing my shizz. Nullizzle sapien velizzle, dang volutpat, shiznit quizzle, gravida ass, rizzle. Pot get down get down tortor. Sed erizzle. Black go to hizzle dolizzle dapibizzle turpis fo shizzle my nizzle yo. Maurizzle pellentesque nibh et check it out. Bow wow wow check it out tortizzle. Pellentesque for sure rhoncizzle bow wow wow. In owned habitasse brizzle dictumst. Nizzle dapibizzle. Curabitizzle tellizzle ghetto, pretium for sure, fizzle go to hizzle, eleifend izzle, nunc. Dope suscipizzle. Integizzle boom shackalack velit ass purus.</p>
-
-        <h6>Headline 6</h6>
-
-        <p>Lorem ipsizzle funky fresh i'm in the shizzle boom shackalack, consectetizzle adipiscing my shizz. Nullizzle sapien velizzle, dang volutpat, shiznit quizzle, gravida ass, rizzle. Pot get down get down tortor. Sed erizzle. Black go to hizzle dolizzle dapibizzle turpis fo shizzle my nizzle yo. Maurizzle pellentesque nibh et check it out. Bow wow wow check it out tortizzle. Pellentesque for sure rhoncizzle bow wow wow. In owned habitasse brizzle dictumst. Nizzle dapibizzle. Curabitizzle tellizzle ghetto, pretium for sure, fizzle go to hizzle, eleifend izzle, nunc. Dope suscipizzle. Integizzle boom shackalack velit ass purus.</p>
-
-        <p>Roses are <em>emphasized</em></br>
-        Violets are <strong>strong</strong></p>
-
-        <h3>We all like making lists</h3>
-
-        <ul>
-          <li>Red Apples</li>
-          <li>Purple Grapes</li>
-          <li>Green Kiwifruits</li>
-        </ul>
-
-        <p>Let's get crazy:</p>
-
-        <ol>
-          <li>
-            <p>This is a list item with two paragraphs. Lorem ipsum dolor
-            sit amet, consectetuer adipiscing elit. Aliquam hendrerit
-            mi posuere lectus.</p>
-
-            <p>Vestibulum enim wisi, viverra nec, fringilla in, laoreet
-            vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
-            sit amet velit.</p>
-          </li>
-          <li><p>Suspendisse id sem consectetuer libero luctus adipiscing.</p></li>
-        </ol>
-
-        <p>What about some code <strong>in</strong> a list? That's insane, right?</p>
-
-        <ol>
-          <li>
-            <p>In Ruby you can map like this:</p>
-              <code>['a', 'b'].map { |x| x.uppercase }</code>
-          </li>
-          <li>
-            <p>In Rails, you can do a shortcut:</p>
-              <code>['a', 'b'].map(&amp;:uppercase)</code>
-          </li>
-        </ol>
-
-        <p>Some people seem to like definition lists</p>
-
-        <dl>
-        <dt>Lower cost</dt>
-          <dd>The new version of this product costs significantly less than the previous one!</dd>
-          <dt>Easier to use</dt>
-          <dd>We've changed the product so that it's much easier to use!</dd>
-        </dl>
-
-        <h3>I am a robot</h3>
-
-        <p>Maybe you want to print <code>robot</code> to the console 1000 times. Why not?</p>
-<pre>
-def robot_invasion
-puts("robot " * 1000)
-end
-</pre>
-
-<p>How about we throw some angle braces and ampersands in there?</p>
-
-<pre><code>&lt;div class="footer"&gt;
-&amp;copy; 2013 Zorg Industries
-&lt;/div&gt;
-</code></pre>
-
-        <h3>If you need to blame someone, the best way to do so is by quoting them:</h3>
-
-        <blockquote>
-        <p>I, at any rate, am convinced that He does not throw dice.</p>
-        </blockquote>
-
-        <p>Or perhaps someone a little less eloquent:</p>
-
-        <blockquote>
-        <p>I wish you'd have given me this written question ahead of time so I
-        could plan for it... I'm sure something will pop into my head here in
-        the midst of this press conference, with all the pressure of trying to
-        come up with answer, but it hadn't yet...</p>
-
-        <p>I don't want to sound like
-        I have made no mistakes. I'm confident I have. I just haven't - you
-        just put me under the spot here, and maybe I'm not as quick on my feet
-        as I should be in coming up with one.</p>
-        </blockquote>
-
-        <h2>An octocat appears!</h2>
-        <img alt="an octocat!" src="http://octodex.github.com/images/octocat-de-los-muertos.jpg" />
-        <p>My favorite octocat, illustrated by <a href="https://github.com/cameronmcefee">@cameronmceffee</a>.</p>
-
-        <h2>Table for two</h2>
-
-        <table>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Rank</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Tom Preston-Werner</td>
-          <td>Awesome</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Albert Einstein</td>
-          <td>Nearly as awesome</td>
-        </tr>
-        </table>
-
+          <a href="https://github.com/NathanYee/softwareSystemsTangyTurtles/blob/master/LICENSE.txt">MIT License</a>
       </section>
     </div>
 
