@@ -5,7 +5,7 @@
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Slate is a responsive theme for GitHub Pages" />
+    <meta name="description" content="Arduino Synthesizer : A 1-bit DAC built with Arduino and C" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -43,20 +43,26 @@
 
         <h1>The Team</h1>
         <p>
-          <a href="https://github.com/shanek21 ">Shane Kelly</a>,
-          <a href="https://github.com/cmoser96 ">Carl Moser</a>,
+          <a href="https://github.com/shanek21" >Shane Kelly</a>,
+          <a href="https://github.com/cmoser96" >Carl Moser</a>,
           <a href="https://github.com/NathanYee">Nathan Yee</a>
         </p>
 
         <h1>Resources</h1>
         <p>
           <a href="http://makezine.com/projects/make-35/advanced-arduino-sound-synthesis/ ">Skill Builder: Advanced Arduino Sound Synthesis, Jon Thompson</a>,
+          <a href="https://www.appelsiini.net/2011/simple-usart-with-avr-libc ">Serial communications on an Arduino in C.</a>,
+          <a href="https://www.arduino.cc/en/Reference/PortManipulation ">Arduino port registers.</a>,
         </p>
+
 
         <h1>Usage</h1>
         <p>
-          To play a song: <br />
-          <code>./stdinToSerial -f little_lamb.txt -p /dev/ttyACM0</code>
+          Compile the Arduino code and upload it to the Uno.<br />
+          <code>bash compile.sh listing1</code><br />
+          <br />
+          Once the Arduino code has been uploaded, send the desired song file to the serial port that the Arduino is currently connected to. <br />
+          <code>make && ./stdinToSerial -f little_lamb.txt -p /dev/ttyACM0</code> <br />
         </p>
 
         <h1>License</h1>
